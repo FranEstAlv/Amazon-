@@ -1,0 +1,960 @@
+# Amazon Shopping `base.apk` — Static inventory and reverse-engineering report
+
+> Scope: static analysis of the user-supplied `base.apk`. This report inventories metadata, paths, resources, DEX strings, URLs/endpoints and architecture indicators. It does **not** reproduce full proprietary decompiled Java/Kotlin source.
+
+## Artifact identity
+
+- File: `base.apk`
+- Size: 108,427,123 bytes (103.40 MiB)
+- SHA-256: `3c95e5b27fb0cbaa1168e64e92328891f3050367dbd0f408520de20779f6f131`
+- MD5: `c74a5592ec4118098c659c260833aae1`
+- ZIP entries: 4,492
+- DEX files: 11
+- Unique DEX strings: 430,909
+- Unique resource/manifest strings recovered: 74,276
+
+### ABI / native libraries
+
+**No `lib/<abi>/*.so` entries are present in this base APK.** In particular, no `lib/arm64-v8a/` is included. This strongly indicates native libraries are delivered in a separate ABI split (for example `config.arm64_v8a.apk`) or another package not supplied here.
+
+## Top-level ZIP inventory
+
+- `AUTHORS`: 1 entries
+- `AndroidManifest.xml`: 1 entries
+- `DebugProbesKt.bin`: 1 entries
+- `LICENSE-AspectJ.html`: 1 entries
+- `Log4j-charsets.properties`: 1 entries
+- `LogFormat.json`: 1 entries
+- `META-INF`: 158 entries
+- `README.md`: 1 entries
+- `WhisperCloakProtocolBuffersModel`: 6 entries
+- `WhisperJoinProtocolBuffersModel`: 38 entries
+- `age-signals.properties`: 1 entries
+- `assets`: 153 entries
+- `barcode-scanning-common.properties`: 1 entries
+- `barcode-scanning.properties`: 1 entries
+- `billing-eap-cross-sell-per-transaction-offer.properties`: 1 entries
+- `classes.dex`: 1 entries
+- `classes10.dex`: 1 entries
+- `classes11.dex`: 1 entries
+- `classes2.dex`: 1 entries
+- `classes3.dex`: 1 entries
+- `classes4.dex`: 1 entries
+- `classes5.dex`: 1 entries
+- `classes6.dex`: 1 entries
+- `classes7.dex`: 1 entries
+- `classes8.dex`: 1 entries
+- `classes9.dex`: 1 entries
+- `com`: 545 entries
+- `common.properties`: 1 entries
+- `core-common.properties`: 1 entries
+- `fabric`: 1 entries
+- `firebase-encoders-json.properties`: 1 entries
+- `firebase-encoders-proto.properties`: 1 entries
+- `firebase-encoders.properties`: 1 entries
+- `firebase-iid-interop.properties`: 1 entries
+- `firebase-measurement-connector.properties`: 1 entries
+- `google`: 11 entries
+- `googleid.properties`: 1 entries
+- `image.properties`: 1 entries
+- `interactivemedia.properties`: 1 entries
+- `kiang_state_object.proto`: 1 entries
+- `kotlin`: 8 entries
+- `kotlin-tooling-metadata.json`: 1 entries
+- `licenses`: 3 entries
+- `log4j2.xml`: 1 entries
+- `messaging_event.proto`: 1 entries
+- `messaging_event_extension.proto`: 1 entries
+- `okhttp3`: 2 entries
+- `org`: 7 entries
+- `play-services-ads-identifier.properties`: 1 entries
+- `play-services-appset.properties`: 1 entries
+- `play-services-auth-api-phone.properties`: 1 entries
+- `play-services-auth-base.properties`: 1 entries
+- `play-services-auth-blockstore.properties`: 1 entries
+- `play-services-auth.properties`: 1 entries
+- `play-services-base.properties`: 1 entries
+- `play-services-basement.properties`: 1 entries
+- `play-services-clearcut.properties`: 1 entries
+- `play-services-cloud-messaging.properties`: 1 entries
+- `play-services-fido.properties`: 1 entries
+- `play-services-flags.properties`: 1 entries
+- `play-services-identity-credentials.properties`: 1 entries
+- `play-services-location.properties`: 1 entries
+- `play-services-mlkit-barcode-scanning.properties`: 1 entries
+- `play-services-pal.properties`: 1 entries
+- `play-services-phenotype.properties`: 1 entries
+- `play-services-places-placereport.properties`: 1 entries
+- `play-services-stats.properties`: 1 entries
+- `play-services-tasks.properties`: 1 entries
+- `play-services-vision-common.properties`: 1 entries
+- `play-services-vision.properties`: 1 entries
+- `release-timestamp.txt`: 1 entries
+- `res`: 3,480 entries
+- `resources.arsc`: 1 entries
+- `review.properties`: 1 entries
+- `src`: 11 entries
+- `stamp-cert-sha256`: 1 entries
+- `transport-api.properties`: 1 entries
+- `transport-backend-cct.properties`: 1 entries
+- `transport-runtime.properties`: 1 entries
+- `tv-ads.properties`: 1 entries
+- `vision-common.properties`: 1 entries
+- `vision-interfaces.properties`: 1 entries
+
+## DEX inventory
+
+- `classes.dex` — 9,820,988 bytes uncompressed; 9,820,988 compressed
+- `classes10.dex` — 5,532,684 bytes uncompressed; 5,532,684 compressed
+- `classes11.dex` — 9,718,720 bytes uncompressed; 9,718,720 compressed
+- `classes2.dex` — 9,103,384 bytes uncompressed; 9,103,384 compressed
+- `classes3.dex` — 7,288,880 bytes uncompressed; 7,288,880 compressed
+- `classes4.dex` — 9,699,384 bytes uncompressed; 9,699,384 compressed
+- `classes5.dex` — 8,083,736 bytes uncompressed; 8,083,736 compressed
+- `classes6.dex` — 6,442,704 bytes uncompressed; 6,442,704 compressed
+- `classes7.dex` — 4,946,152 bytes uncompressed; 4,946,152 compressed
+- `classes8.dex` — 3,233,328 bytes uncompressed; 3,233,328 compressed
+- `classes9.dex` — 4,036,140 bytes uncompressed; 4,036,140 compressed
+
+## Manifest permissions recovered
+
+- `android.permission.ACCESS_BACKGROUND_LOCATION`
+- `android.permission.ACCESS_COARSE_LOCATION`
+- `android.permission.ACCESS_FINE_LOCATION`
+- `android.permission.ACCESS_NETWORK_STATE`
+- `android.permission.ACCESS_WIFI_STATE`
+- `android.permission.ACTIVITY_RECOGNITION`
+- `android.permission.AUTHENTICATE_ACCOUNTS`
+- `android.permission.BIND_JOB_SERVICE`
+- `android.permission.BIND_QUICK_SETTINGS_TILE`
+- `android.permission.BIND_REMOTEVIEWS`
+- `android.permission.BLUETOOTH`
+- `android.permission.BLUETOOTH_ADMIN`
+- `android.permission.BLUETOOTH_ADVERTISE`
+- `android.permission.BLUETOOTH_CONNECT`
+- `android.permission.BLUETOOTH_SCAN`
+- `android.permission.CAMERA`
+- `android.permission.CHANGE_WIFI_STATE`
+- `android.permission.CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS`
+- `android.permission.DETECT_SCREEN_CAPTURE`
+- `android.permission.DUMP`
+- `android.permission.FLASHLIGHT`
+- `android.permission.FOREGROUND_SERVICE`
+- `android.permission.FOREGROUND_SERVICE_LOCATION`
+- `android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK`
+- `android.permission.GET_ACCOUNTS`
+- `android.permission.HIGH_SAMPLING_RATE_SENSORS`
+- `android.permission.INTERNET`
+- `android.permission.MANAGE_ACCOUNTS`
+- `android.permission.MODIFY_AUDIO_SETTINGS`
+- `android.permission.NEARBY_WIFI_DEVICES`
+- `android.permission.NFC`
+- `android.permission.POST_NOTIFICATIONS`
+- `android.permission.READ_BASIC_PHONE_STATE`
+- `android.permission.READ_CONTACTS`
+- `android.permission.READ_EXTERNAL_STORAGE`
+- `android.permission.READ_PHONE_STATE`
+- `android.permission.RECEIVE_BOOT_COMPLETED`
+- `android.permission.RECORD_AUDIO`
+- `android.permission.REQUEST_ADD_QUICK_SETTINGS_TILE`
+- `android.permission.START_VIEW_PERMISSION_USAGE`
+- `android.permission.USE_BIOMETRIC`
+- `android.permission.USE_CREDENTIALS`
+- `android.permission.USE_FINGERPRINT`
+- `android.permission.VIBRATE`
+- `android.permission.WAKE_LOCK`
+- `android.permission.WRITE_EXTERNAL_STORAGE`
+- `com.amazon.appmanager.preload.permission.READ_PRELOAD_DEVICE_INFO_PROVIDER`
+- `com.amazon.dcp.config.permission.DYN_CONFIG_VALUES_UPDATED`
+- `com.amazon.dcp.metrics.permission.METRICS_PERMISSION`
+- `com.amazon.dcp.settings.permission.READ_SETTINGS`
+- `com.amazon.dcp.sso.permission.AmazonAccountPropertyService.property.changed`
+- `com.amazon.dcp.sso.permission.CUSTOMER_ATTRIBUTE_SERVICE`
+- `com.amazon.dcp.sso.permission.MANAGE_COR_PFM`
+- `com.amazon.dcp.sso.permission.USE_DEVICE_CREDENTIALS`
+- `com.amazon.dcp.sso.permission.account.changed`
+- `com.amazon.identity.permission.CALL_AMAZON_DEVICE_INFORMATION_PROVIDER`
+- `com.amazon.identity.permission.CAN_CALL_MAP_INFORMATION_PROVIDER`
+- `com.amazon.identity.permission.GENERIC_IPC`
+- `com.amazon.mShop.permission.RECEIVE_AMAZON_PAY_OPENED`
+- `com.amazon.mShop.permission.ViewPermissionUsageActivity`
+- `com.amazon.mShop.permission.v2.health.HealthPermissionRationaleActivity`
+- `com.amazon.mShop.permission.v2.health.HealthPermissionRequestActivity`
+- `com.amazon.mShop.permission.v2.storage.PermissionCheckerImpl$SystemPermissionRequestActivity`
+- `com.amazon.platform.plugin.permission.v2`
+
+## URL schemes / deep-link schemes observed
+
+- `https://` — 1,797 string occurrences
+- `http://` — 229 string occurrences
+- `ssnap://` — 63 string occurrences
+- `content://` — 21 string occurrences
+- `market://` — 17 string occurrences
+- `com.amazon.mobile.shopping.web://` — 14 string occurrences
+- `class://` — 6 string occurrences
+- `file://` — 5 string occurrences
+- `upi://` — 3 string occurrences
+- `amzn://` — 3 string occurrences
+- `audible://` — 3 string occurrences
+- `mpres://` — 3 string occurrences
+- `com.amazon.mobile.shopping://` — 2 string occurrences
+- `nativeto://` — 2 string occurrences
+- `navorigin://` — 2 string occurrences
+- `upimeta://` — 2 string occurrences
+- `kindle://` — 2 string occurrences
+- `rawresource://` — 1 string occurrences
+- `ihttps://` — 1 string occurrences
+- `ws://` — 1 string occurrences
+- `shopping.thirdpartynavigation://` — 1 string occurrences
+- `amznapp://` — 1 string occurrences
+- `android-app://` — 1 string occurrences
+- `com.amazon.shortcut.open://` — 1 string occurrences
+
+## Unique network hosts recovered from literal URLs
+
+- `%1$s`
+- `%s`
+- `%s.amazon.com`
+- `.css`
+- `.jpg|right|thumb|.js`
+- `10.0.2.2`
+- `according`
+- `accounts.google.com`
+- `acs.amazonaws.com`
+- `addeventlistenerresponsible`
+- `admob-gmats.uc.r.appspot.com`
+- `ain`
+- `amazonpay.amazon.in`
+- `an`
+- `aomedia.org`
+- `apac.account.amazon.com`
+- `apache.org`
+- `api-project-16912134167.firebaseio.com`
+- `api-sandbox.amazon.co.jp`
+- `api.amazon.co.jp`
+- `api.amazon.co.uk`
+- `api.amazon.com`
+- `api.mshop.bdtelemetry.amazon`
+- `api.sandbox.amazon.co.uk`
+- `api.sandbox.amazon.com`
+- `applicationslink`
+- `arcus-uswest.amazon.com`
+- `ator`
+- `bob-dispatch`
+- `bugsnag.com`
+- `cipa.jp`
+- `clinic.amazon.com`
+- `cloudfront.beta.us-east-1.cei.aee.amazon.dev`
+- `cloudfront.prod.us-east-1.cei.aee.amazon.dev`
+- `code.amazon.com`
+- `completion.amazon.ae`
+- `completion.amazon.ca`
+- `completion.amazon.cl`
+- `completion.amazon.co.id`
+- `completion.amazon.co.jp`
+- `completion.amazon.co.th`
+- `completion.amazon.co.uk`
+- `completion.amazon.co.za`
+- `completion.amazon.com`
+- `completion.amazon.com.au`
+- `completion.amazon.com.be`
+- `completion.amazon.com.br`
+- `completion.amazon.com.co`
+- `completion.amazon.com.mx`
+- `completion.amazon.com.ng`
+- `completion.amazon.com.tr`
+- `completion.amazon.de`
+- `completion.amazon.eg`
+- `completion.amazon.es`
+- `completion.amazon.fr`
+- `completion.amazon.ie`
+- `completion.amazon.in`
+- `completion.amazon.it`
+- `completion.amazon.nl`
+- `completion.amazon.pl`
+- `completion.amazon.sa`
+- `completion.amazon.se`
+- `completion.amazon.sg`
+- `console.harmony.a2z.com`
+- `credential-locker-service.amazon.com`
+- `cript`
+- `cs7m8y1346.execute-api.eu-west-1.amazonaws.com`
+- `d1g1ijo93vb6w7.cloudfront.net`
+- `d1s44l2n6n3ub3.cloudfront.net`
+- `d1y7710zoh.execute-api.us-west-2.amazonaws.com`
+- `d2o17xe39ff0y5.cloudfront.net`
+- `dashif.org`
+- `data`
+- `data-ae-pre-prod.dub.corp.amazon.com`
+- `data-au-pre-prod.pdx.corp.amazon.com`
+- `data-be-pre-prod.dub.corp.amazon.com`
+- `data-br-pre-prod.iad.corp.amazon.com`
+- `data-ca-pre-prod.iad.corp.amazon.com`
+- `data-cl-pre-prod.iad.corp.amazon.com`
+- `data-cn-pre-prod.pek.corp.amazon.com`
+- `data-co-pre-prod.iad.corp.amazon.com`
+- `data-de-pre-prod.dub.corp.amazon.com`
+- `data-eg-pre-prod.dub.corp.amazon.com`
+- `data-es-pre-prod.dub.corp.amazon.com`
+- `data-fr-pre-prod.dub.corp.amazon.com`
+- `data-ie-pre-prod.dub.corp.amazon.com`
+- `data-in-pre-prod.dub.corp.amazon.com`
+- `data-it-pre-prod.dub.corp.amazon.com`
+- `data-jp-pre-prod.pdx.corp.amazon.com`
+- `data-mx-pre-prod.iad.corp.amazon.com`
+- `data-ng-pre-prod.dub.corp.amazon.com`
+- `data-nl-pre-prod.dub.corp.amazon.com`
+- `data-pl-pre-prod.dub.corp.amazon.com`
+- `data-ru-pre-prod.pdx.corp.amazon.com`
+- `data-sa-pre-prod.dub.corp.amazon.com`
+- `data-se-pre-prod.dub.corp.amazon.com`
+- `data-sg-pre-prod.pdx.corp.amazon.com`
+- `data-tr-pre-prod.dub.corp.amazon.com`
+- `data-uk-pre-prod.dub.corp.amazon.com`
+- `data-us-pre-prod.iad.corp.amazon.com`
+- `data-za-pre-prod.dub.corp.amazon.com`
+- `data.amazon.ae`
+- `data.amazon.ca`
+- `data.amazon.cl`
+- `data.amazon.cn`
+- `data.amazon.co.jp`
+- `data.amazon.co.uk`
+- `data.amazon.co.za`
+- `data.amazon.com`
+- `data.amazon.com.au`
+- `data.amazon.com.be`
+- `data.amazon.com.br`
+- `data.amazon.com.co`
+- `data.amazon.com.mx`
+- `data.amazon.com.ng`
+- `data.amazon.com.tr`
+- `data.amazon.de`
+- `data.amazon.eg`
+- `data.amazon.es`
+- `data.amazon.fr`
+- `data.amazon.ie`
+- `data.amazon.in`
+- `data.amazon.it`
+- `data.amazon.nl`
+- `data.amazon.pl`
+- `data.amazon.ru`
+- `data.amazon.sa`
+- `data.amazon.se`
+- `data.amazon.sg`
+- `dc5eyoaab3317.cloudfront.net`
+- `de-development.amazon.com`
+- `default.url`
+- `descriptionrelatively`
+- `det-ta-g7g.amazon.com`
+- `det-ta-g7g.integ.amazon.com`
+- `determine-default-browser.amazon.com`
+- `developer.android.com`
+- `developer.apple.com`
+- `device-metrics-us-2.amazon.com`
+- `device-metrics-us.amazon.com`
+- `dictionaryperceptionrevolutionfoundationpx;height`
+- `dn4p25lkulg7f.cloudfront.net`
+- `docs.amplify.aws`
+- `docs.bugsnag.com`
+- `dp-mont.integ.amazon.com`
+- `dpms1yvv0tpoy.cloudfront.net`
+- `dss-na-gamma.amazon.com`
+- `dss-na.amazon.com`
+- `dtjsystab5p0r.cloudfront.net`
+- `ecx.images-amazon.com`
+- `encoding=`
+- `es-development.amazon.com`
+- `eu.account.amazon.com`
+- `event.mshopbugsnag.irm.amazon.dev`
+- `eventlog-visualsearch.amazon.com`
+- `evergreen.corp.amazon.com`
+- `example.com`
+- `familiar`
+- `firebase.google.com`
+- `fr-development.amazon.com`
+- `g.co`
+- `github.com`
+- `goals.integ.amazon.com`
+- `goo.gle`
+- `googleads.g.doubleclick.net`
+- `groups.google.com`
+- `health`
+- `health.amazon.com`
+- `html4`
+- `i`
+- `images-na.ssl-images-amazon.com`
+- `imasdk.googleapis.com`
+- `imenglish`
+- `in`
+- `in-development.amazon.com`
+- `in-pre-prod.amazon.com`
+- `interested`
+- `internal.amazon.com`
+- `interpreted`
+- `iparticipation`
+- `iptc.org`
+- `issues.amazon.com`
+- `issuetracker.google.com`
+- `it-development.amazon.com`
+- `jp-development.amazon.com`
+- `ktor.io`
+- `link`
+- `localhost`
+- `m.media-amazon.com`
+- `match-visualsearch-ae.amazon.com`
+- `match-visualsearch-au.amazon.com`
+- `match-visualsearch-be.amazon.com`
+- `match-visualsearch-br.amazon.com`
+- `match-visualsearch-ca.amazon.com`
+- `match-visualsearch-de.amazon.com`
+- `match-visualsearch-eg.amazon.com`
+- `match-visualsearch-es.amazon.com`
+- `match-visualsearch-fr.amazon.com`
+- `match-visualsearch-in.amazon.com`
+- `match-visualsearch-it.amazon.com`
+- `match-visualsearch-jp.amazon.com`
+- `match-visualsearch-mx.amazon.com`
+- `match-visualsearch-nl.amazon.com`
+- `match-visualsearch-pl.amazon.com`
+- `match-visualsearch-sa.amazon.com`
+- `match-visualsearch-se.amazon.com`
+- `match-visualsearch-sg.amazon.com`
+- `match-visualsearch-tr.amazon.com`
+- `match-visualsearch-uk.amazon.com`
+- `match-visualsearch-za.amazon.com`
+- `match-visualsearch.amazon.com`
+- `mathematicsmargin-top`
+- `msh`
+- `msh.amazon.ae`
+- `msh.amazon.ca`
+- `msh.amazon.cl`
+- `msh.amazon.co.id`
+- `msh.amazon.co.jp`
+- `msh.amazon.co.th`
+- `msh.amazon.co.uk`
+- `msh.amazon.co.za`
+- `msh.amazon.com`
+- `msh.amazon.com.au`
+- `msh.amazon.com.be`
+- `msh.amazon.com.br`
+- `msh.amazon.com.co`
+- `msh.amazon.com.mx`
+- `msh.amazon.com.ng`
+- `msh.amazon.com.tr`
+- `msh.amazon.de`
+- `msh.amazon.eg`
+- `msh.amazon.es`
+- `msh.amazon.fr`
+- `msh.amazon.ie`
+- `msh.amazon.in`
+- `msh.amazon.it`
+- `msh.amazon.nl`
+- `msh.amazon.pl`
+- `msh.amazon.pt`
+- `msh.amazon.sa`
+- `msh.amazon.se`
+- `msh.amazon.sg`
+- `na.account.amazon.com`
+- `navigation`
+- `notify.bugsnag.com`
+- `ns.adobe.com`
+- `ns.useplus.org`
+- `option`
+- `otlp.bugsnag.com`
+- `pagead2.googlesyndication.com`
+- `pharmacy`
+- `pharmacy.amazon.com`
+- `phonegap.com`
+- `pinterest.com`
+- `play.google.com`
+- `plus.google.com`
+- `prime.amazon.co.jp`
+- `prime.amazon.com`
+- `prime.amazon.eu`
+- `prod.cm.publishers.advertising.a2z.com`
+- `purl.org`
+- `px`
+- `qjtlkmueuf.execute-api.us-east-1.amazonaws.com`
+- `re8sfystqa.execute-api.us-east-1.amazonaws.com`
+- `reddit.com`
+- `rtla.amazon.com`
+- `s3-us-west-1.amazonaws.com`
+- `s3.amazonaws.com`
+- `s;text-align`
+- `schemas.android.com`
+- `schemas.microsoft.com`
+- `session.mshopbugsnag.irm.amazon.dev`
+- `sessions.bugsnag.com`
+- `sg-development.amazon.com`
+- `sim.amazon.com`
+- `site_name`
+- `specs.openid.net`
+- `ssl.gstatic.com`
+- `stackoverflow.com`
+- `staticsuggested`
+- `style=`
+- `support.google.com`
+- `t.corp.amazon.com`
+- `tiny.amazon.com`
+- `tools.ietf.org`
+- `trace.mshopbugsnag.irm.amazon.dev`
+- `twitter.com`
+- `ua-compatible`
+- `uk-development.amazon.com`
+- `us-east-1.mmp-proxy.mshop.amazon.dev`
+- `vlo7ege5lvdwrpxngqb5khopha.appsync-api.us-east-1.amazonaws.com`
+- `w.amazon.com`
+- `w3.org`
+- `was`
+- `whether`
+- `wiki.labcollab.net`
+- `wl.amazon-dss.com`
+- `www`
+- `www-`
+- `www.`
+- `www.%s`
+- `www.a`
+- `www.aiim.org`
+- `www.amazo.ie`
+- `www.amazon`
+- `www.amazon%s`
+- `www.amazon-customtabtest.com`
+- `www.amazon.ae`
+- `www.amazon.ca`
+- `www.amazon.cl`
+- `www.amazon.cn`
+- `www.amazon.co.id`
+- `www.amazon.co.jp`
+- `www.amazon.co.th`
+- `www.amazon.co.uk`
+- `www.amazon.co.za`
+- `www.amazon.com`
+- `www.amazon.com.au`
+- `www.amazon.com.be`
+- `www.amazon.com.br`
+- `www.amazon.com.co`
+- `www.amazon.com.mx`
+- `www.amazon.com.ng`
+- `www.amazon.com.tr`
+- `www.amazon.de`
+- `www.amazon.eg`
+- `www.amazon.es`
+- `www.amazon.fr`
+- `www.amazon.ie`
+- `www.amazon.in`
+- `www.amazon.it`
+- `www.amazon.jp`
+- `www.amazon.nl`
+- `www.amazon.pl`
+- `www.amazon.pt`
+- `www.amazon.sa`
+- `www.amazon.se`
+- `www.amazon.sg`
+- `www.android.com`
+- `www.c`
+- `www.css`
+- `www.dom.com`
+- `www.facebook.com`
+- `www.google.com`
+- `www.googleapis.com`
+- `www.hortcut`
+- `www.icon`
+- `www.interpretation`
+- `www.language=`
+- `www.ngs.ac.uk`
+- `www.npes.org`
+- `www.recent`
+- `www.slf4j.org`
+- `www.snapchat.com`
+- `www.style=`
+- `www.text-decoration`
+- `www.w3.org`
+- `www.wencodeuricomponent`
+- `www.world`
+- `www.years`
+- `wà¸`
+- `x`
+- `xerces.apache.org`
+- `xml.org`
+- `xmlpull.org`
+- `xt`
+- `your-host.amazon.com`
+- `youtrack.jetbrains.com`
+
+## API / route-like paths recovered
+
+- `/account`
+- `/account/*`
+- `/account/address/*`
+- `/account/create`
+- `/account/manage/*`
+- `/account/payment/*`
+- `/account/profile-picker`
+- `/account/tou/*`
+- `/alm/byg`
+- `/alm/category`
+- `/alm/groceryme`
+- `/alm/storefront`
+- `/ap`
+- `/ap/3p_authentication`
+- `/ap/3p_callback`
+- `/ap/challenge`
+- `/ap/cnep`
+- `/ap/cvf/request`
+- `/ap/dcq`
+- `/ap/exchangetoken`
+- `/ap/exchangetoken/cookies`
+- `/ap/forgotpassword`
+- `/ap/id`
+- `/ap/mapcancel`
+- `/ap/maplanding`
+- `/ap/maplanding/accountmigration/cancel`
+- `/ap/maplanding/accountmigration/complete`
+- `/ap/mfa`
+- `/ap/oa`
+- `/ap/oacerror`
+- `/ap/pv`
+- `/ap/register`
+- `/ap/signin`
+- `/api`
+- `/api/2017/recentsearches`
+- `/api/2017/suggestions`
+- `/api/marketplaces`
+- `/api/marketplaces/%s/cart/carts/retail/items`
+- `/api/marketplaces/%s/cart/carts/retail/threshold-progress-block`
+- `/api/marketplaces/%s/products/%s`
+- `/api/marketplaces/%s/stores/alm/next-available-slot`
+- `/api/marketplaces/:marketplace-id/cart/count`
+- `/auth/O2/create/codepair`
+- `/auth/authCode`
+- `/auth/authority/signature`
+- `/auth/authorize`
+- `/auth/beginAccountMigration`
+- `/auth/bootstrap/sso`
+- `/auth/create/code`
+- `/auth/create/codepair`
+- `/auth/map/config`
+- `/auth/mobile/encryptionkey`
+- `/auth/o2/token`
+- `/auth/register`
+- `/auth/relyingPartyLogout`
+- `/auth/signin`
+- `/auth/startActorCreationAndEnrollment`
+- `/auth/startActorEnrollment`
+- `/auth/startUpdatePhoneNumber`
+- `/auth/startUpdatePin`
+- `/auth/startUpdatePinPreference`
+- `/auth/tiv/push_notification`
+- `/auth/token`
+- `/auth/upgradeToken`
+- `/auth/v2/authorize-challenge`
+- `/cart/ewc/cartpreview`
+- `/cart/luxury`
+- `/checkout`
+- `/checkout/**`
+- `/checkout/byg`
+- `/checkout/byg/**`
+- `/checkout/entry/buynow/**`
+- `/checkout/entry/cart/**`
+- `/checkout/p`
+- `/customer`
+- `/customer/i18n-preferences/currency`
+- `/customer/i18n-preferences/language`
+- `/dp`
+- `/dp/(`
+- `/dp/*`
+- `/dp/.*)`
+- `/g`
+- `/gp/aw`
+- `/gp/aw(/.*)`
+- `/gp/aw/c`
+- `/gp/aw/contact-us/chat`
+- `/gp/aw/d`
+- `/gp/aw/d/)`
+- `/gp/aw/d/*`
+- `/gp/aw/d/.*)`
+- `/gp/aw/gb`
+- `/gp/aw/gb/*`
+- `/gp/aw/h.html`
+- `/gp/aw/homepage.html`
+- `/gp/aw/ls`
+- `/gp/aw/s`
+- `/gp/aw/s/*`
+- `/gp/aw/search/s`
+- `/gp/aw/ya`
+- `/gp/browse`
+- `/gp/browse.html`
+- `/gp/browse/*`
+- `/gp/buy`
+- `/gp/buy/pharmacy`
+- `/gp/buy/pharmacy/*`
+- `/gp/buy/spc/handlers/static-submit-decoupled.html`
+- `/gp/buy/thankyou`
+- `/gp/buy/thankyou/handlers/display.html`
+- `/gp/buyagain`
+- `/gp/cart`
+- `/gp/cart/mobile/go-to-checkout.html`
+- `/gp/cart/view.html`
+- `/gp/cb`
+- `/gp/checkoutportal/enter-checkout.html`
+- `/gp/cs`
+- `/gp/css`
+- `/gp/css/homepage.html`
+- `/gp/css/order-history`
+- `/gp/css/your-account-access`
+- `/gp/delivery/ajax/address-change.html`
+- `/gp/dmusic/device/android/buy.html`
+- `/gp/f.html`
+- `/gp/gc/create`
+- `/gp/goldbox`
+- `/gp/goldbox/*`
+- `/gp/gw/ajax/mshop.html`
+- `/gp/gw/ajax/secondary.html`
+- `/gp/help/customer/display.html`
+- `/gp/homepage.html`
+- `/gp/legacy/order-history`
+- `/gp/mas/get-appstore/android`
+- `/gp/mas/get-appstore/android/**`
+- `/gp/mas/get/android`
+- `/gp/mas/get/android/**`
+- `/gp/mobile/deals`
+- `/gp/mobile/deals/*`
+- `/gp/mobile/dp/*`
+- `/gp/mobile/ipad-home`
+- `/gp/mobile/tablet-browse`
+- `/gp/mobile/udp`
+- `/gp/mobile/udp/*`
+- `/gp/mobile/ybh`
+- `/gp/mshop/apps`
+- `/gp/navigation/notifications/1.0/payments`
+- `/gp/navigation/notifications/1.0/suppress`
+- `/gp/prime/membership-experience/interstitial/get-pseudo-prime-first-browse-url.html`
+- `/gp/product`
+- `/gp/product/*`
+- `/gp/product/.*)`
+- `/gp/profile/follows`
+- `/gp/pwain/landing`
+- `/gp/r.html`
+- `/gp/registry/atwl/add.html`
+- `/gp/search`
+- `/gp/site-directory/ref=shopall_btn`
+- `/gp/video/detail`
+- `/gp/your-account/gateway/orders`
+- `/gp/your-account/order-details`
+- `/gp/your-account/order-history`
+- `/gp/your-account/ship-track`
+- `/gp/yourstore/home`
+- `/hz/contact-us`
+- `/hz/cs/help`
+- `/hz/follow/timeline`
+- `/hz/wishlist/ls`
+- `/hz/wishlist/ls/*`
+- `/hz/wishlist/ls/lol`
+- `/hz/wishlist/yoursaves`
+- `/images`
+- `/images/G`
+- `/images/I`
+- `/images/S`
+- `/images/assets_DO_NOT_HARDCODE/off_platform_sharing_experiences/fb-preview-fallback-post.png`
+- `/music`
+- `/music/player`
+- `/orders`
+- `/payments`
+- `/pharmacy`
+- `/pharmacy/*`
+- `/pharmacy/byg`
+- `/pharmacy/byg/*`
+- `/prime`
+- `/prime/get-care-now.*`
+- `/prime/off-to-college.*`
+- `/prime/onemedical/api.*`
+- `/prime/onemedical/lwa`
+- `/prime/onemedical/membership.*`
+- `/prime/onemedical/signup`
+- `/prime/onemedical/signup/personal-info/multi-enroll.*`
+- `/prime/onemedical/terms.*`
+- `/s`
+- `/s/*`
+- `/s/browse`
+- `/tez`
+- `/tez/browse/cart`
+- `/tez/browse/orderConfirmation`
+- `/v1`
+- `/v1/GetWiFiNetworks`
+- `/v1/SaveWifiNetwork`
+- `/v1/computeConfigurationData`
+- `/v1/createAPForWifiProvisionee`
+- `/v1/discoveredProvisionableDevice`
+- `/v1/discoveredProvisionee`
+- `/v1/finalizeEcdheAuthenticationSession`
+- `/v1/getCustomerDevicesCredentials`
+- `/v1/getCustomerProvisioneesSetupStatus`
+- `/v1/getDeviceRegistrationStatus`
+- `/v1/getWifiSyncAuthToken`
+- `/v1/recordDevicePossessionIntentInnerBarcode`
+- `/v1/startEcdheAuthenticationSession`
+- `/v1/validateWifiSyncAuthToken`
+- `/v2/getCustomerDevicesCredentials`
+
+## Assets (complete path inventory)
+
+- `assets/43f611476f13dfaef1d14e15cfd5a12790988aaebe7f900a7932bce408c3a0e5/3602d07c-de40-9454-5e4c-61fa5a14169d`
+- `assets/AnimationStatesv16d.tar`
+- `assets/FezModelMapping.json`
+- `assets/PlayReady/bDomainCertSecL0.dat`
+- `assets/PlayReady/bdevcert.dat`
+- `assets/PlayReady/bgroupcert.dat`
+- `assets/PlayReady/devcert.dat`
+- `assets/PlayReady/devcerttemplate.dat`
+- `assets/PlayReady/ndrcerttemplate.dat`
+- `assets/PlayReady/ndrgpriv.dat`
+- `assets/PlayReady/ndrpriv.dat`
+- `assets/PlayReady/prinit.dat`
+- `assets/PlayReady/priv.dat`
+- `assets/PlayReady/unsignedtemplate.dat`
+- `assets/PlayReady/zgpriv.dat`
+- `assets/PlayReady/zprivencr.dat`
+- `assets/PlayReady/zprivsig.dat`
+- `assets/Shaders.zip`
+- `assets/action_grid_config.json`
+- `assets/action_grid_config_br.json`
+- `assets/action_hub_config.json`
+- `assets/amb/amb_generated_bundle.js`
+- `assets/aoBakedShadow.tar`
+- `assets/basicPngMaterial.tar`
+- `assets/bookings_static_response.json`
+- `assets/chiclet_config.json`
+- `assets/chiclet_config_v2.json`
+- `assets/circleSpotlightMaterial.tar`
+- `assets/client-api-default.html`
+- `assets/com/mypinpad/tsdk/682402c540636a00b-`
+- `assets/com/mypinpad/tsdk/8a24a2fdfae3b072a-`
+- `assets/cordova-mash-full-1.11.js`
+- `assets/customConfiguration`
+- `assets/dexopt/baseline.prof`
+- `assets/dexopt/baseline.profm`
+- `assets/dimensionTagLeft.tar`
+- `assets/dimensionTagMiddle.tar`
+- `assets/dimensionTagRight.tar`
+- `assets/engine_materials.tar`
+- `assets/floorArrowsDragTexture.tar`
+- `assets/floorArrowsRotateTexture.tar`
+- `assets/floorClassifierDTree.xml`
+- `assets/floorClassifierRforest.xml`
+- `assets/floorMaskMaterial.tar`
+- `assets/fonts/amazonember_bd.ttf`
+- `assets/fonts/amazonember_bdit.ttf`
+- `assets/fonts/amazonember_lt.ttf`
+- `assets/fonts/amazonember_ltit.ttf`
+- `assets/fonts/amazonember_rg.ttf`
+- `assets/fonts/amazonember_rg_v2.ttf`
+- `assets/fonts/amazonember_rgit.ttf`
+- `assets/fonts/amazonemberdisplay_bd.ttf`
+- `assets/fonts/amazonemberdisplay_bdit.ttf`
+- `assets/fonts/amazonemberdisplay_he.ttf`
+- `assets/fonts/amazonemberdisplay_heit.ttf`
+- `assets/fonts/amazonemberdisplay_lt.ttf`
+- `assets/fonts/amazonemberdisplay_ltit.ttf`
+- `assets/fonts/amazonemberdisplay_md.ttf`
+- `assets/fonts/amazonemberdisplay_mdit.ttf`
+- `assets/fonts/amazonemberdisplay_rg.ttf`
+- `assets/fonts/amazonemberdisplay_rgit.ttf`
+- `assets/fonts/amazonembermodern_bd.ttf`
+- `assets/fonts/amazonembermodern_rg.ttf`
+- `assets/fonts/amazonembermoderntextstd_bold.ttf`
+- `assets/fonts/amazonembermoderntextstd_bolditalic.ttf`
+- `assets/fonts/amazonembermoderntextstd_italic.ttf`
+- `assets/fonts/amazonembermoderntextstd_medium.ttf`
+- `assets/fonts/amazonembermoderntextstd_mediumitalic.ttf`
+- `assets/fonts/amazonembermoderntextstd_regular.ttf`
+- `assets/fonts/bookerlydisplay_rg.ttf`
+- `assets/fresh_anim_v1.json`
+- `assets/furnitureSpotlightTexture.ktx`
+- `assets/health-runtime-config/com.amazon.mshop.health.configs.v1.json`
+- `assets/health-runtime-config/com.amazon.mshop.health.modal.android.v2.json`
+- `assets/health-runtime-config/com.amazon.mshop.health.modal.ios.v2.json`
+- `assets/health-runtime-config/com.amazon.mshop.health.modal.v1.json`
+- `assets/hw_n2apay_data.json`
+- `assets/hw_n2upi_data.json`
+- `assets/include/bugsnag.h`
+- `assets/include/event.h`
+- `assets/instrument_panel_config_ae.json`
+- `assets/instrument_panel_config_in.json`
+- `assets/katara-runtime-config/com.amazon.mshop.katara.configs.v1.json`
+- `assets/katara-runtime-config/com.amazon.mshop.katara.modal.v1.json`
+- `assets/launcher_hw_data.json`
+- `assets/light_material.tar`
+- `assets/load_page_metrics.js`
+- `assets/metrics_config.json`
+- `assets/metrics_configuration`
+- `assets/mlkit_barcode_models/barcode_ssd_mobilenet_v1_dmp25_quant.tflite`
+- `assets/mlkit_barcode_models/oned_auto_regressor_mobile.tflite`
+- `assets/mlkit_barcode_models/oned_feature_extractor_mobile.tflite`
+- `assets/models/detect.caffemodel`
+- `assets/models/detect.prototxt`
+- `assets/models/sr.caffemodel`
+- `assets/models/sr.prototxt`
+- `assets/orangeDot.tar`
+- `assets/page_config_mshop_AE.json`
+- `assets/page_config_mshop_BR.json`
+- `assets/page_config_mshop_IN.json`
+- `assets/pay_anim_v1.json`
+- `assets/pay_anim_v2.json`
+- `assets/pay_anim_v3.json`
+- `assets/pay_anim_v4.json`
+- `assets/pay_anim_v5.json`
+- `assets/polygonMaterial.tar`
+- `assets/scripts/webviewtitle.js`
+- `assets/search_and_scan_config.json`
+- `assets/shadowReceiverMaterial.tar`
+- `assets/singleChannelMaskMaterial.tar`
+- `assets/smash/ImageView.js`
+- `assets/smash/TransitionManager.js`
+- `assets/smash/View.js`
+- `assets/smash/WebView.js`
+- `assets/smash/atlInterfaceForNative.js`
+- `assets/smash/cookie.js`
+- `assets/smash/es6-promise.js`
+- `assets/smash/message.js`
+- `assets/smash/metric.js`
+- `assets/smash/navigate.js`
+- `assets/smash/preferences.js`
+- `assets/smash/transition_callback.js`
+- `assets/smash/transition_hidden.html`
+- `assets/smash/weblab.js`
+- `assets/smile_growing.json`
+- `assets/smile_orange.json`
+- `assets/splashscreen/Aquaphor.png`
+- `assets/splashscreen/Bounty.png`
+- `assets/splashscreen/Cera_Ve.png`
+- `assets/splashscreen/Dawn.png`
+- `assets/splashscreen/Now-PrimaryLogo-White.png`
+- `assets/splashscreen/Patch.png`
+- `assets/ssnap-app_bundle-store/ssnap-shell.android.hbc`
+- `assets/ssnap-app_bundle-store/ssnap-shell.android.js`
+- `assets/ssnap-app_manifest-store/ssnap-shell.manifest`
+- `assets/ssnap-app_manifest-store/ssnap-shell.manifest.staged`
+- `assets/ssnap/mbp-feature-integration.json`
+- `assets/ssnap/prod-feature-integration.json`
+- `assets/suggestions_config.json`
+- `assets/tablePolygonMaterial.tar`
+- `assets/tableTopPlacementRig.tar`
+- `assets/tableTopSpotlightTexture.ktx`
+- `assets/tabletopShadowsMaterial.tar`
+- `assets/tvWallSpotlightTexture.ktx`
+- `assets/tvspotlight.tar`
+- `assets/wallHighlight.tar`
+- `assets/wallMask.ktx`
+- `assets/wallWithMaskMaterial.tar`
+- `assets/webview/ConfigWebviewBridge-min.js`
+- `assets/whitePlacementRig.tar`
+- `assets/whitePlacementRigBP1.tar`
+- `assets/whitePlacementRigBP2.tar`
+- `assets/wifots_marketplace_config.json`
+
+## Notes and limitations
+
+- Static strings can expose dormant, experimental or feature-flagged code; presence does not prove a route executes for every user.
+- URLs may be templates, test endpoints, documentation references, telemetry endpoints, third-party SDK endpoints or production application endpoints. Dynamic instrumentation is required to distinguish actual runtime traffic.
+- This `base.apk` contains no ABI-specific native `.so` files, so ARM64 symbol/library analysis requires the matching ABI split.
+- Class/package census uses DEX descriptors and therefore includes bundled third-party libraries as well as Amazon code.
